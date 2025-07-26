@@ -6,7 +6,7 @@ const CartProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [totalPrice , setTotalPrice] = useState(null)
 
-
+    // add to cart 
     const addToCart = (product) => {
         const exists = cart.find((item) => item.id === product.id)
         if(exists){
@@ -22,6 +22,25 @@ const CartProvider = ({children}) => {
         });
         
     };
+    
+    // add quantity 
+    const handleIncrement = (id) => {
+        const updateCart = cart.find(item => item.id === id)
+        if(updateCart){
+            setCart(cart.map(item => item.id === id ? {...item, quantity: item.quantity + 1} : item))
+        }
+    }
+    // minus quantity
+    const handleDecrement = (id) => {
+        const updateCart = cart.find(item => item.id === id)
+        console.log(updateCart)
+        if(updateCart.quantity <= 1){
+            removeFromCart(updateCart)
+        }else{
+            setCart(cart.map(item => item.id === id ? {...item, quantity: item.quantity - 1} : item))
+
+        }
+    } 
 
     // total cost
     useEffect( () => {
@@ -43,7 +62,7 @@ const CartProvider = ({children}) => {
     };
     return (<>
         {/* Cart Provider */}
-    <CartContext.Provider value={{cart, addToCart, removeFromCart,totalPrice}}>
+    <CartContext.Provider value={{cart, addToCart, removeFromCart,totalPrice, handleIncrement,handleDecrement}}>
          <Toaster/>
         {children}
     </CartContext.Provider>

@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import CartContext from "../../Context/Cartcontext";
 
-const AddCart = ({item,i}) => {
-    const {removeFromCart,addToCart} = useContext(CartContext)
+const AddCart = ({item}) => {
+    const {removeFromCart,handleIncrement, handleDecrement} = useContext(CartContext)
     const {image,name,description,price,quantity} = item;
 
    
@@ -21,16 +21,17 @@ const AddCart = ({item,i}) => {
 
                     <div className="inline-flex h-6 items-center bg-gray-600  rounded-2xl  space-x-2 overflow-hidden">
                         <button 
-                        onClick={() => addToCart(item)}
+                        onClick={() => handleIncrement(item.id)}
                         className="bg-gray-700 text-white text-2xl px-3   hover:bg-gray-800 transition cursor-pointer">+</button>
                         <p className="font-semibold  text-white">{quantity}</p>
                         <button
-                         className="bg-gray-700 text-white text-2xl px-3  hover:bg-gray-800 transition cursor-pointer">-</button>
+                        onClick={() => handleDecrement(item.id)}
+                        className="bg-gray-700 text-white text-2xl px-3  hover:bg-gray-800 transition cursor-pointer">-</button>
                     </div>
 
                 </div>
             </div>
-            <button onClick={() => removeFromCart(item,i)} 
+            <button onClick={() => removeFromCart(item)} 
             className="flex"><IoMdCloseCircle className="text-3xl text-red-500 cursor-pointer "/></button>
         </div>
     );
