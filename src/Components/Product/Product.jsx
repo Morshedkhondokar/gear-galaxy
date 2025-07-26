@@ -23,7 +23,7 @@ const Product = ({product}) => {
                      <button
                      onClick={() => addToCart(product)}
                      className="btn btn-outline btn-info p-2 rounded-xl mr-3">Add Cart</button>
-                    <Link to={`/products/${id}`}><button class="btn btn-outline btn-success p-2 rounded-2xl">View Details</button></Link>
+                    <Link to={`/products/${id}`}><button className="btn btn-outline btn-success p-2 rounded-2xl">View Details</button></Link>
                    </div>
                   <div className="flex gap-1.5 items-center ">
                     <p>{rating}</p>

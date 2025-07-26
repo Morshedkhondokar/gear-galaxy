@@ -3,8 +3,11 @@ import { IoMdCloseCircle } from "react-icons/io";
 import CartContext from "../../Context/Cartcontext";
 
 const AddCart = ({item,i}) => {
-    const {removeFromCart} = useContext(CartContext)
-    const {image,name,description,price} = item;
+    const {removeFromCart,addToCart} = useContext(CartContext)
+    const {image,name,description,price,quantity} = item;
+
+   
+
     return (
         <div className='flex justify-between bg-[#2a323d] p-5 rounded-2xl'>
             <div className='flex gap-2.5 '>
@@ -13,8 +16,18 @@ const AddCart = ({item,i}) => {
                 </div>
                 <div className='md:space-y-2 my-auto'>
                     <h1 className='text-2xl font-bold'>{name}</h1>
-                    <p><span className='font-extrabold'>Description:</span> {description}</p>
+                    <p className="text-[14px] md:text-[18px] font-medium"><span className='font-extrabold'>Description:</span > {description}</p>
                     <h5><span className='font-extrabold'>Price:</span> ${price}</h5>
+
+                    <div className="inline-flex h-6 items-center bg-gray-600  rounded-2xl  space-x-2 overflow-hidden">
+                        <button 
+                        onClick={() => addToCart(item)}
+                        className="bg-gray-700 text-white text-2xl px-3   hover:bg-gray-800 transition cursor-pointer">+</button>
+                        <p className="font-semibold  text-white">{quantity}</p>
+                        <button
+                         className="bg-gray-700 text-white text-2xl px-3  hover:bg-gray-800 transition cursor-pointer">-</button>
+                    </div>
+
                 </div>
             </div>
             <button onClick={() => removeFromCart(item,i)} 

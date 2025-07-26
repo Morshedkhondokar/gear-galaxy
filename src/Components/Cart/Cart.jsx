@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import CartContext from '../../Context/Cartcontext';
 import AddCart from '../AddCart/AddCart';
 import { Link } from 'react-router';
 
 const Cart = () => {
-    const [totalPrice , setTotalPrice] = useState(null)
-    const {cart} = useContext(CartContext)
+    const {cart,totalPrice} = useContext(CartContext)
+    
 
-    useEffect( () => {
-        const total = cart.reduce((acc, item) => acc + item.price, 0)
-        setTotalPrice(total)
-    },[cart])
+    
     return (
         <div className='px-2.5'>
             <div className='flex justify-between mt-6 '> 
