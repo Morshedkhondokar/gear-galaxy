@@ -1,7 +1,11 @@
 import { Link, NavLink } from "react-router";
-import { GiShoppingBag } from "react-icons/gi";
+import { GiShoppingCart } from "react-icons/gi";
+import { BsHeartFill } from "react-icons/bs";
+import { useContext } from "react";
+import CartContext from "../../Context/Cartcontext";
 
 const Navbar = () => {
+  const { cart } = useContext(CartContext);
   const Links = (
     <>
       <li>
@@ -49,10 +53,26 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{Links}</ul>
       </div>
-      <div className="navbar-end">
-        <Link to='/cart'>
-        <button className="btn bg-amber-600 p-2 rounded-2xl cursor-pointer"><GiShoppingBag className="text-2xl" /></button>
+      <div className="navbar-end flex gap-3.5 ">
+        {/* Cart icon */}
+        <Link to="/cart">
+          <button className="relative flex justify-center items-center p-1 rounded-full hover:bg-gray-100 transition cursor-pointer">
+            {/* Cart Count Badge */}
+            {cart.length > 0 && (
+              <span className="absolute -top-1 -right-1 text-xs text-white bg-red-500 rounded-full w-4 h-4 flex justify-center items-center shadow-md">
+                {cart.length}
+              </span>
+            )}
+            {/* Shopping Bag Icon */}
+            <GiShoppingCart className="text-3xl  text-gray-500"  />
+          </button>
         </Link>
+        {/* wishlist  Icon*/}
+        {/* <Link to="">
+          <button className="btn bg-amber-600 p-2 rounded-2xl cursor-pointer">
+            <BsHeartFill className="text-2xl" />
+          </button>
+        </Link> */}
       </div>
     </div>
   );
