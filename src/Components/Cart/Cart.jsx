@@ -3,16 +3,22 @@ import CartContext from '../../Context/Cartcontext';
 import AddCart from '../AddCart/AddCart';
 import { Link } from 'react-router';
 import { FaSort } from "react-icons/fa6";
+import toast from 'react-hot-toast';
 
 const Cart = () => {
-    const {cart,totalPrice,setCart} = useContext(CartContext)
+    const {cart,totalPrice,setCart,handlePurchaseBtn} = useContext(CartContext)
     const [isAscending, setIsAscending] = useState(true)
     
 
     const sortByPrice = () => {
-        const sortedCart = [...cart].sort((a,b)=> isAscending ? a.price - b.price : b.price - a.price)
-        setCart(sortedCart)
-        setIsAscending(!isAscending)
+        if(cart.length > 0){
+            const sortedCart = [...cart].sort((a,b)=> isAscending ? a.price - b.price : b.price - a.price)
+            setCart(sortedCart)
+            setIsAscending(!isAscending)
+        }else{
+
+            toast.error("Your cart is empty now!! buy Something.")
+        }
     }
     return (
         <div className='px-2.5'>
@@ -24,7 +30,10 @@ const Cart = () => {
                      <button
                      onClick={ sortByPrice}
                      className='btn bg-[#f54a00] text-white rounded-xl p-2'>Sort by Price <FaSort/></button>
-                    <button className='btn bg-[#f54a00] text-white rounded-xl p-2 ml-2.5'>Purchase</button>
+
+                    <button
+                    onClick={handlePurchaseBtn}
+                    className='btn bg-[#f54a00] text-white rounded-xl p-2 ml-2.5'>Purchase</button>
                    </div>
                 </div>
             </div>
