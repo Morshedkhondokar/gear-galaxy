@@ -5,12 +5,12 @@ import CartContext from "../../Context/Cartcontext";
 
 
 const Product = ({product}) => {
-    const {id,name,image,brand, rating} = product;
+    const {id,name,image,brand, rating,price} = product;
     const {addToCart} = useContext(CartContext)
 
 
     return (
-        <div className="h-96 max-w-[370px] border border-gray-400 rounded-2xl p-6">
+        <div className="h-98 max-w-[370px] border border-gray-400 rounded-2xl p-6">
            
             <div className="bg-amber-400 rounded-2xl overflow-hidden max-w-[400px] max-h-[400px]">
                 <img className="h-56 w-auto object-cover " src={image} alt="" />
@@ -18,7 +18,8 @@ const Product = ({product}) => {
             <div className="p-2">
                 <h1 className="text-[18px] font-bold ">Name: {name}</h1>
                 <p className="font-medium">Brand: {brand}</p>
-                <div className="flex justify-between gap-5 items-center my-3">
+                <p className="font-medium">Price: ${price}</p>
+                <div className="flex justify-between gap-5 items-center my-1">
                    <div>
                      <button
                      onClick={() => addToCart(product)}

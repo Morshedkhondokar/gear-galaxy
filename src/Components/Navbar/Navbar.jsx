@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import { GiShoppingBag } from "react-icons/gi";
 
 const Navbar = () => {
   const Links = (
@@ -50,7 +50,9 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{Links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <Link to='/cart'>
+        <button className="btn bg-amber-600 p-2 rounded-2xl cursor-pointer"><GiShoppingBag className="text-2xl" /></button>
+        </Link>
       </div>
     </div>
   );

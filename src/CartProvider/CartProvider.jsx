@@ -33,7 +33,7 @@ const CartProvider = ({children}) => {
     // minus quantity
     const handleDecrement = (id) => {
         const updateCart = cart.find(item => item.id === id)
-        console.log(updateCart)
+        // console.log(updateCart)
         if(updateCart.quantity <= 1){
             removeFromCart(updateCart)
         }else{
@@ -48,10 +48,7 @@ const CartProvider = ({children}) => {
         setTotalPrice(total)
     },[cart])
 
-    useEffect(() => {
-    console.log("Cart updated:", cart);
-    }, [cart]);
-
+    // Remove from cart
     const removeFromCart = (product) => {
         const removeCart = cart.filter(item => item.id !== product.id);
         setCart(removeCart); 
@@ -62,7 +59,7 @@ const CartProvider = ({children}) => {
     };
     return (<>
         {/* Cart Provider */}
-    <CartContext.Provider value={{cart, addToCart, removeFromCart,totalPrice, handleIncrement,handleDecrement}}>
+    <CartContext.Provider value={{cart, addToCart,setCart, removeFromCart,totalPrice, handleIncrement,handleDecrement}}>
          <Toaster/>
         {children}
     </CartContext.Provider>
