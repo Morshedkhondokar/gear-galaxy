@@ -15,7 +15,7 @@ const AddCart = ({item}) => {
                     <img className=' rounded-2xl h-[130px] object-cover' src={image} alt="" />
                 </div>
                 <div className='md:space-y-2 my-auto'>
-                    <h1 className='text-2xl font-bold'>{name}</h1>
+                    <h1 className='text-xl md:text-2xl font-bold'>{name}</h1>
                     <p className="text-[14px] md:text-[18px] font-medium"><span className='font-extrabold'>Description:</span > {description}</p>
                     <h5><span className='font-extrabold'>Price:</span> ${price}</h5>
 

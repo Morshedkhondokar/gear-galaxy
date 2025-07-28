@@ -3,9 +3,11 @@ import { GiShoppingCart } from "react-icons/gi";
 import { BsHeartFill } from "react-icons/bs";
 import { useContext } from "react";
 import CartContext from "../../Context/Cartcontext";
+import WishlistContext from "../../Context/WishlistContext";
 
 const Navbar = () => {
   const { cart } = useContext(CartContext);
+  const {wishlist} = useContext(WishlistContext)
   const Links = (
     <>
       <li>
@@ -68,11 +70,16 @@ const Navbar = () => {
           </button>
         </Link>
         {/* wishlist  Icon*/}
-        {/* <Link to="">
-          <button className="btn bg-amber-600 p-2 rounded-2xl cursor-pointer">
-            <BsHeartFill className="text-2xl" />
+        <Link to="wishlist">
+          <button className="relative flex justify-center items-center p-1 rounded-full hover:bg-gray-100 transition cursor-pointer">
+            {wishlist.length > 0 && (
+              <span className="absolute -top-1 -right-1 text-xs text-white bg-red-500 rounded-full w-4 h-4 flex justify-center items-center shadow-md">
+                {wishlist.length}
+              </span>
+            )}
+            <BsHeartFill className="text-3xl  text-gray-500" />
           </button>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

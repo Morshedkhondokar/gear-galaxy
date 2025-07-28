@@ -1,22 +1,32 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
+import { GiShoppingCart } from "react-icons/gi";
+
 
 import CartContext from "../../Context/Cartcontext";
+import WishlistContext from "../../Context/WishlistContext";
 
 
 const ProductDetails = () => {
   const [details, setDetails] = useState([]);
   const { productId } = useParams();
   const {addToCart} = useContext(CartContext)
+  const {handleWishProduct,wishlist} = useContext(WishlistContext)
+  
   useEffect(() => {
     fetch("/products.json")
       .then((res) => res.json())
       .then((data) => setDetails(data));
   }, []);
-  console.log(details, productId);
+  // console.log(details, productId);
 
   const product = details.find((item) => item.id === parseInt(productId));
+
+  const isWishlist = wishlist.some(item => item.id === product?.id)
+
+  
 
    
 
@@ -51,11 +61,19 @@ const ProductDetails = () => {
               <FaStar className="text-orange-400" />
             </div>
 
-            <div>
+            <div className="flex items-center mt-1.5">
+              {/* add cart */}
               <button
               onClick={ () => addToCart(product)}
-              class="btn btn-outline btn-info p-2 rounded-xl mr-3">
+              className="btn btn-outline btn-info p-2 rounded-xl mr-3">
                 Add Cart
+                <GiShoppingCart className="text-2xl"/>
+              </button>
+              {/* add wishlist */}
+              <button
+              onClick={() => handleWishProduct(product)}
+               className="text-xl font-bold cursor-pointer border border-gray-100 p-2 rounded-full hover:bg-gray-100 transition">
+                <FaHeart  className={isWishlist ? "text-red-500" : "text-gray-500"}/>
               </button>
             </div>
           </div>

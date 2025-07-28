@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import RootLayout from './RootLayout/RootLayOut.jsx'
 
-import { createBrowserRouter, RouterProvider,} from "react-router";
+import { createBrowserRouter, RouterProvider,} from "react-router-dom";
 
 import Home from './Components/Home/Home.jsx';
 import Products from './Components/Products/Products.jsx';
@@ -11,6 +11,8 @@ import Cart from './Components/Cart/Cart.jsx';
 import ErrorPage from './ErrorPage/ErrorPage.jsx';
 import ProductDetails from './Components/ProductDetails/ProductDetails.jsx';
 import CartProvider from './CartProvider/CartProvider.jsx';
+import WishlistProvider from './WishlistProvider/WishlistProvider.jsx';
+import Wishlist from './Wishlist/Wishlist.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
       {
         path:"/cart",
         element: <Cart></Cart>
+      },
+      {
+        path:"/wishlist",
+        element: <Wishlist></Wishlist>
       }
     ]
   },
@@ -41,8 +47,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <WishlistProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </WishlistProvider>
   </StrictMode>,
 )
