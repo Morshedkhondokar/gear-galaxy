@@ -7,7 +7,7 @@ const WishCart = ({item}) => {
     const {removeFromWishlist} = useContext(WishlistContext)
     const {image,name,price,description} = item
     return (
-         <div className='flex justify-between bg-[#2a323d] p-5 rounded-2xl'>
+             <div className='flex justify-between bg-[#2a323d] p-5 rounded-2xl'>
                     <div className='flex gap-2.5 '>
                         <div className='max-w-[190px] h-[130px]'>
                             <img className=' rounded-2xl h-[130px] object-cover' src={image} alt="" />
