@@ -3,7 +3,10 @@ import toast, { Toaster } from "react-hot-toast";
 import CartContext from '../Context/Cartcontext';
 
 const CartProvider = ({children}) => {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(() => {
+        const saveCart = localStorage.getItem("cart");
+        return saveCart ? JSON.parse(saveCart) : [];
+    });
     const [totalPrice , setTotalPrice] = useState(null)
     const [finalTotalPrice, setFinalTotalPrice] = useState(0)
 
@@ -15,7 +18,7 @@ const CartProvider = ({children}) => {
         if(exists){
             
             setCart(cart.map(item => item.id === product.id ? 
-                 {...item, quantity: item.quantity + 1} : item))
+                {...item, quantity: item.quantity + 1} : item))
         }else{
             setCart([{...product, quantity: 1 },...cart ])
             
@@ -42,6 +45,11 @@ const CartProvider = ({children}) => {
 
         }
     } 
+
+    // localstorage save Cart data
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
     // total cost
     useEffect( () => {

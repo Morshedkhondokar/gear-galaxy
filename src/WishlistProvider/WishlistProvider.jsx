@@ -4,7 +4,10 @@ import toast from "react-hot-toast";
 
 
 const WishlistProvider = ({children}) => {
-    const [wishlist, setWishlist] = useState([])
+    const [wishlist, setWishlist] = useState(() => {
+        const saveWishlist = localStorage.getItem("wishlist");
+        return saveWishlist ? JSON.parse(saveWishlist) : [];
+    })
 
     const handleWishProduct = (product) => {
         const exists = wishlist.find(item => item.id === product.id)
@@ -17,9 +20,9 @@ const WishlistProvider = ({children}) => {
     }
 
     
-
-    useEffect(() => {
-        console.log(wishlist.length)
+    // save Localstorage wishlist data
+    useEffect( () => {
+        localStorage.setItem("wishlist", JSON.stringify(wishlist))
     },[wishlist])
 
     // Remove from Wishlist
